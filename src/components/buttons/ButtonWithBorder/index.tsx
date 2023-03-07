@@ -1,9 +1,15 @@
 import React, { FC } from 'react';
 import { ButtonStyled, ButtonText } from './styles';
 
-const ButtonWithBorder: FC<{ color?: string; title: string }> = ({ color, title }) => {
+type Props = {
+  color?: string;
+  title: string;
+  onPress: () => void;
+};
+
+const ButtonWithBorder: FC<Props> = ({ color, title, onPress }) => {
   return (
-    <ButtonStyled color={color}>
+    <ButtonStyled underlayColor={'rgba(255,255,255,0.2)'} color={color} onPress={onPress}>
       <ButtonText>{title}</ButtonText>
     </ButtonStyled>
   );

@@ -5,6 +5,10 @@ import { Image } from 'react-native';
 import ButtonWithBorder from '../../../components/buttons/ButtonWithBorder';
 
 const RegisterScreen: ScreenWithProps<'RegisterScreen'> = ({ navigation, route }) => {
+  const onPress = () => {
+    navigation.navigate('UserDataRegisterScreen');
+  };
+
   return (
     <Container>
       <LogoImage source={require('../../../../assets/logo.png')} />
@@ -13,7 +17,7 @@ const RegisterScreen: ScreenWithProps<'RegisterScreen'> = ({ navigation, route }
         <Title fontSize={21} paddingBottom={16}>
           Регистрация
         </Title>
-        <ButtonWithBorder title="Врач" />
+        <ButtonWithBorder title="Врач" onPress={onPress} />
       </RegisterContainer>
     </Container>
   );
