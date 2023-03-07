@@ -1,7 +1,11 @@
-import { StyleSheet } from 'react-native';
+import styled from 'styled-components/native';
+import { createGlobalStyle } from 'styled-components';
 
-export const typography = StyleSheet.create({
-  defaultFontFamily: {
-    fontFamily: 'Manrope',
-  },
-});
+const GlobalStyle = createGlobalStyle`
+  centralize{
+    justify-content: center;
+    align-items: center;
+  }
+`;
+
+export default GlobalStyle;
