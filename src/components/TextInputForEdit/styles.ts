@@ -1,9 +1,10 @@
 import styled from 'styled-components/native';
-import { frenchGray, redError } from '../../styles/colors';
+import { mainColor, redError } from '../../styles/colors';
 
-export const StyledTextInput = styled.TextInput<{ borderColor: string }>`
+export const StyledTextInput = styled.TextInput<{ borderColor: string; bgColor?: string }>`
   width: 100%;
   border: 1px solid ${({ borderColor }) => borderColor};
+  background-color: ${({ bgColor }) => bgColor || mainColor};
   border-radius: 8px;
   padding: 14px 10px 14px 16px;
 `;

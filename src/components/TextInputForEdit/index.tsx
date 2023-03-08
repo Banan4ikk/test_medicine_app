@@ -2,7 +2,14 @@ import { isFunction } from 'lodash';
 import React, { FC, useCallback, useState } from 'react';
 import { StyleSheet, Text, TextInput, TextInputProps } from 'react-native';
 import { ErrorContainer, ErrorText, StyledTextInput } from './styles';
-import { frenchGray, greenSuccess, mainBackgroundColor, redError } from '../../styles/colors';
+import {
+  alabasterWhite,
+  frenchGray,
+  greenSuccess,
+  mainBackgroundColor,
+  mainColor,
+  redError,
+} from '../../styles/colors';
 import CheckMarkIcon from '../../../svg/CkeckMarkIcon';
 
 export type StatusType = 'primary' | 'danger' | 'success';
@@ -58,7 +65,13 @@ const TextInputForEdit: FC<TextInputProps & { status: StatusType }> = ({
 
   return (
     <ErrorContainer>
-      <StyledTextInput borderColor={selectBorderColor()} {...other} onFocus={onFocusHandler} onBlur={onBlurHandler} />
+      <StyledTextInput
+        borderColor={selectBorderColor()}
+        bgColor={!isFocused && status === 'primary' ? alabasterWhite : mainColor}
+        onFocus={onFocusHandler}
+        onBlur={onBlurHandler}
+        {...other}
+      />
       {status === 'danger' && !isFocused && <ErrorText>Заполните поле</ErrorText>}
       {status === 'success' && !isFocused && <CheckMarkIcon style={styles.iconStyles} />}
     </ErrorContainer>
