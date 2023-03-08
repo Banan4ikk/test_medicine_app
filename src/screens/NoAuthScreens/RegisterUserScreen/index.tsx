@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { StyleSheet } from 'react-native';
 import { ScreenWithProps } from '../../../navigation/ScreenParams';
 import * as Yup from 'yup';
 import { Container } from '../../../styles/global';
@@ -9,8 +10,21 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import TextInputForEdit, { StatusType } from '../../../components/TextInputForEdit';
 import { FieldContainer, FieldText } from './styles';
 import PhoneInput from '../../../components/PhoneInput';
-import RNPickerSelect from 'react-native-picker-select';
 import DropDownInput from '../../../components/DropDownInput';
+import { mainBackgroundColor, mainColor } from '../../../styles/colors';
+import ClipIcon from '../../../../svg/ClipIcon';
+import FilePickerInput from '../../../components/FilePickerInput';
+
+const styles = StyleSheet.create({
+  customInput: {
+    borderStyle: 'dashed',
+    borderColor: mainBackgroundColor,
+    backgroundColor: mainColor,
+  },
+  iconStyle: {
+    position: 'absolute',
+  },
+});
 
 type ValueWithKey = {
   key?: string;
@@ -27,6 +41,7 @@ interface IFormValues {
   city: string;
   document: any;
   specialization: string;
+  promo: string;
 }
 
 const formSchema = Yup.object().shape({
@@ -38,6 +53,7 @@ const formSchema = Yup.object().shape({
   city: Yup.string().required(),
   document: Yup.string().required(),
   specialization: Yup.string().required(),
+  promo: Yup.string().notRequired(),
 });
 /*eslint-disable*/
 const PHONE_INPUT_MASK = ['+', '7', ' ', '(', /\d/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/];
@@ -47,12 +63,15 @@ const cities = [
   {label: 'Новосибирск', value: 'NOVOSIBIRSK'}
 ]
 
+const specializations = [
+  {label: 'Терапевт', value: 'terapevt'},
+  {label: 'Хирург', value: 'surgeon'},
+  {label: 'Кардиолог', value: 'kardiolog'}
+]
+
 const RegisterUserScreen: ScreenWithProps<'RegisterUserScreen'> = ({ navigation, route }) => {
   const {
     control,
-    handleSubmit,
-    formState: { isValid },
-    watch,
   } = useForm<IFormValues>({
     defaultValues: {
       city: '',
@@ -175,7 +194,7 @@ const RegisterUserScreen: ScreenWithProps<'RegisterUserScreen'> = ({ navigation,
             control={control}
             name="city"
             key="city"
-            render={({ field, fieldState: { isTouched, error } }) => (
+            render={({ field }) => (
               <DropDownInput
                 onValueChange={field.onChange}
                 value={field.value}
@@ -186,6 +205,53 @@ const RegisterUserScreen: ScreenWithProps<'RegisterUserScreen'> = ({ navigation,
             )}
           />
         </FieldContainer>
+        <FieldContainer>
+          <FieldText>Диплом</FieldText>
+          <Controller
+            control={control}
+            name="city"
+            key="city"
+            render={() => (
+              <FilePickerInput/>
+            )}
+          />
+        </FieldContainer>
+        <FieldContainer>
+          <FieldText>Специализация</FieldText>
+          <Controller
+            control={control}
+            name="specialization"
+            key="specialization"
+            render={({ field, fieldState: { isTouched, error } }) => (
+              <DropDownInput
+                onValueChange={field.onChange}
+                value={field.value}
+                items={specializations}
+                placeholder={{inputLabel: 'Выберите', value: 'select'}}
+                itemKey='specialization'
+              />
+            )}
+          />
+        </FieldContainer>
+
+      {/* todo: сюда чекбоксы */}
+        <FieldContainer>
+          <FieldText>Введите промокод</FieldText>
+          <Controller
+            control={control}
+            name="promo"
+            key="promo"
+            render={({ field, fieldState: { isTouched, error } }) => (
+              <TextInputForEdit
+                status={selectCurrentFieldStatus(isTouched, error)}
+                onChangeText={field.onChange}
+                placeholder="Промокод"
+                {...field}
+              />
+            )}
+          />
+        </FieldContainer>
+
       </ContainerWithLogo>
     </Container>
   );

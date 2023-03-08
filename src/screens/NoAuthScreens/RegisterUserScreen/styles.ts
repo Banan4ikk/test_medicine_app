@@ -14,4 +14,5 @@ export const FieldText = styled.Text`
   font-size: 13px;
   line-height: 16px;
   color: ${textBlack};
+  max-width: 65px;
 `;
