@@ -8,9 +8,13 @@ export const WhiteContainer = styled.View`
   border-radius: 16px 16px 0 0;
   margin-top: 15px;
   padding: 0 15px 0 15px;
+  overflow: visible;
+  z-index: 1000;
 `;
 
 export const StyledImageContainer = styled(ImageContainer)`
   align-self: center;
   transform: translateY(-16px);
+  overflow: visible;
+  z-index: 1000;
 `;

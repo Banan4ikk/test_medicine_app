@@ -6,9 +6,11 @@ import NavigationHeader from '../../../components/NavigationHeader';
 import ContainerWithLogo from '../../../components/ContainerWithLogo';
 import { Controller, FieldError, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Text, TextInput, View } from 'react-native';
 import TextInputForEdit, { StatusType } from '../../../components/TextInputForEdit';
 import { FieldContainer, FieldText } from './styles';
+import PhoneInput from '../../../components/PhoneInput';
+import RNPickerSelect from 'react-native-picker-select';
+import DropDownInput from '../../../components/DropDownInput';
 
 type ValueWithKey = {
   key?: string;
@@ -37,6 +39,13 @@ const formSchema = Yup.object().shape({
   document: Yup.string().required(),
   specialization: Yup.string().required(),
 });
+/*eslint-disable*/
+const PHONE_INPUT_MASK = ['+', '7', ' ', '(', /\d/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/];
+const cities = [
+  {label: 'Моксва', value: 'MOSCOW'},
+  {label: 'Санкт-Петербург', value: 'PETERBURG'},
+  {label: 'Новосибирск', value: 'NOVOSIBIRSK'}
+]
 
 const RegisterUserScreen: ScreenWithProps<'RegisterUserScreen'> = ({ navigation, route }) => {
   const {
@@ -74,7 +83,7 @@ const RegisterUserScreen: ScreenWithProps<'RegisterUserScreen'> = ({ navigation,
   return (
     <Container>
       <NavigationHeader withCrossIcon title="Регистрация в кабинете врача" />
-      <ContainerWithLogo>
+      <ContainerWithLogo scrollable>
         <FieldContainer>
           <FieldText>Фамилия</FieldText>
           <Controller
@@ -119,6 +128,60 @@ const RegisterUserScreen: ScreenWithProps<'RegisterUserScreen'> = ({ navigation,
                 onChangeText={field.onChange}
                 placeholder="Отчество"
                 {...field}
+              />
+            )}
+          />
+        </FieldContainer>
+        <FieldContainer>
+          <FieldText>Телефон</FieldText>
+          <Controller
+            control={control}
+            name="phoneNumber"
+            key="phoneNumber"
+            render={({ field, fieldState: { isTouched, error } }) => (
+              <PhoneInput
+                status={selectCurrentFieldStatus(isTouched, error)}
+                onChangeText={field.onChange}
+                placeholder="+7 (___) ___-__-__"
+                textContentType="telephoneNumber"
+                key="phone"
+                returnKeyType="done"
+                keyboardType="phone-pad"
+                mask={PHONE_INPUT_MASK}
+                {...field}
+              />
+            )}
+          />
+        </FieldContainer>
+        <FieldContainer>
+          <FieldText>Email</FieldText>
+          <Controller
+            control={control}
+            name="email"
+            key="email"
+            render={({ field, fieldState: { isTouched, error } }) => (
+              <TextInputForEdit
+                status={selectCurrentFieldStatus(isTouched, error)}
+                onChangeText={field.onChange}
+                placeholder="Email"
+                {...field}
+              />
+            )}
+          />
+        </FieldContainer>
+        <FieldContainer>
+          <FieldText>Город</FieldText>
+          <Controller
+            control={control}
+            name="city"
+            key="city"
+            render={({ field, fieldState: { isTouched, error } }) => (
+              <DropDownInput
+                onValueChange={field.onChange}
+                value={field.value}
+                items={cities}
+                placeholder={{inputLabel: 'Выберите', value: 'select'}}
+                itemKey='city'
               />
             )}
           />
