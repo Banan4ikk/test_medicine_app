@@ -1,5 +1,5 @@
-import React from 'react';
-import { StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, View } from 'react-native';
 import { ScreenWithProps } from '../../../navigation/ScreenParams';
 import * as Yup from 'yup';
 import { Container } from '../../../styles/global';
@@ -8,23 +8,13 @@ import ContainerWithLogo from '../../../components/ContainerWithLogo';
 import { Controller, FieldError, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import TextInputForEdit, { StatusType } from '../../../components/TextInputForEdit';
-import { FieldContainer, FieldText } from './styles';
+import { CheckBoxContainer, CheckBoxText, FieldContainer, FieldText } from './styles';
 import PhoneInput from '../../../components/PhoneInput';
 import DropDownInput from '../../../components/DropDownInput';
-import { mainBackgroundColor, mainColor } from '../../../styles/colors';
-import ClipIcon from '../../../../svg/ClipIcon';
 import FilePickerInput from '../../../components/FilePickerInput';
-
-const styles = StyleSheet.create({
-  customInput: {
-    borderStyle: 'dashed',
-    borderColor: mainBackgroundColor,
-    backgroundColor: mainColor,
-  },
-  iconStyle: {
-    position: 'absolute',
-  },
-});
+import CheckBox from '../../../components/CheckBox/CheckBox';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import SimpleButton from '../../../components/buttons/SimpleButton';
 
 type ValueWithKey = {
   key?: string;
@@ -70,6 +60,9 @@ const specializations = [
 ]
 
 const RegisterUserScreen: ScreenWithProps<'RegisterUserScreen'> = ({ navigation, route }) => {
+
+  const insets = useSafeAreaInsets()
+
   const {
     control,
   } = useForm<IFormValues>({
@@ -98,6 +91,14 @@ const RegisterUserScreen: ScreenWithProps<'RegisterUserScreen'> = ({ navigation,
     }
     return 'primary';
   };
+
+  const onSubmit = () => {
+    navigation.navigate('')
+  }
+
+  const [personalDataChecked, setPersonalDataChecked] = useState(false);
+  const [promosParticipation, setPromosParticipation] = useState(false);
+  const [galleryParticipation, setGalleryParticipation] = useState(false);
 
   return (
     <Container>
@@ -233,8 +234,25 @@ const RegisterUserScreen: ScreenWithProps<'RegisterUserScreen'> = ({ navigation,
             )}
           />
         </FieldContainer>
+        <View style={{paddingVertical: 25}}>
+          <CheckBoxContainer>
+            <CheckBox active={personalDataChecked} onPress={() => setPersonalDataChecked(!personalDataChecked)} />
+            <CheckBoxText>Согласие на обработку персональных данных</CheckBoxText>
+          </CheckBoxContainer>
+          <CheckBoxContainer>
+            <CheckBox active={promosParticipation} onPress={() => setPromosParticipation(!promosParticipation)} />
+            <CheckBoxText>{`Согласие на участие в акциях\n`}
+              <FieldText>по продвижению приложения</FieldText>
+            </CheckBoxText>
+          </CheckBoxContainer>
+          <CheckBoxContainer style={{marginBottom: 10}}>
+            <CheckBox active={galleryParticipation} onPress={() => setGalleryParticipation(!galleryParticipation)} />
+            <CheckBoxText>{`Согласие на участие в галерее\n`}
+              <FieldText>рекомендованых врачей</FieldText>
+            </CheckBoxText>
+          </CheckBoxContainer>
+        </View>
 
-      {/* todo: сюда чекбоксы */}
         <FieldContainer>
           <FieldText>Введите промокод</FieldText>
           <Controller
@@ -251,6 +269,8 @@ const RegisterUserScreen: ScreenWithProps<'RegisterUserScreen'> = ({ navigation,
             )}
           />
         </FieldContainer>
+
+        <SimpleButton title='Продолжить' onPress={onSubmit} style={{marginTop: 15, marginBottom: insets.bottom + 10}}/>
 
       </ContainerWithLogo>
     </Container>

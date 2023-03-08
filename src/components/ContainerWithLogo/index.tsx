@@ -1,7 +1,7 @@
 import React, { FC, PropsWithChildren } from 'react';
 import { StyledImageContainer, WhiteContainer } from './styles';
 import { FillImage, ImageContainer } from '../../styles/global';
-import { KeyboardAvoidingView, ScrollView } from 'react-native';
+import { ViewStyle } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 const ContainerWithLogo: FC<PropsWithChildren<{ scrollable?: boolean }>> = ({ children, scrollable = false }) => {

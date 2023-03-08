@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import { textBlack } from '../../../styles/colors';
+import { mainBackgroundColor, textBlack } from '../../../styles/colors';
 
 export const FieldContainer = styled.View`
   display: flex;
@@ -15,4 +15,20 @@ export const FieldText = styled.Text`
   line-height: 16px;
   color: ${textBlack};
   max-width: 65px;
+`;
+
+export const CheckBoxContainer = styled.View`
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 25px;
+  align-items: center;
+  &:last-child {
+    margin-bottom: 0;
+  }
+`;
+
+export const CheckBoxText = styled.Text`
+  color: ${mainBackgroundColor};
+  text-decoration: underline;
+  margin-left: 16px;
 `;
