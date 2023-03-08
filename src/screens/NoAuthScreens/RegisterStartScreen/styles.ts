@@ -1,13 +1,6 @@
 import styled from 'styled-components/native';
-
-export const Container = styled.View`
-  flex: 1;
-  background-color: #1e63ee;
-  justify-content: center;
-  align-items: center;
-  padding-left: 20px;
-  padding-right: 20px;
-`;
+import { mainColor } from '../../../styles/colors';
+import { Container } from '../../../styles/global';
 
 export const LogoImage = styled.Image`
   width: 112px;
@@ -16,14 +9,20 @@ export const LogoImage = styled.Image`
 
 type PropsTitle = { fontSize?: number; paddingBottom?: number; paddingTop?: number };
 
+export const StyledContainer = styled(Container)`
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+`;
+
 export const Title = styled.Text<PropsTitle>`
   font-family: 'Manrope-SemiBold';
   font-size: ${props => `${props.fontSize || 30}px`};
   line-height: 40px;
   text-align: center;
-  color: #fff;
+  color: ${mainColor};
   margin-top: 16px;
-  padding-bottom: ${({ paddingBottom }) => `${paddingBottom}px`};
+  padding-bottom: ${({ paddingBottom }) => `${paddingBottom || 0}px`};
 `;
 
 export const RegisterContainer = styled.View<{ bottom?: number }>`

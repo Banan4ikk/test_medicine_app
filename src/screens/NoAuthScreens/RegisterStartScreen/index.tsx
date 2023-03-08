@@ -1,6 +1,6 @@
 import React from 'react';
 import { ScreenWithProps } from '../../../navigation/ScreenParams';
-import { Container, LogoImage, RegisterContainer, Title } from './styles';
+import { LogoImage, RegisterContainer, StyledContainer, Title } from './styles';
 import { Image } from 'react-native';
 import ButtonWithBorder from '../../../components/buttons/ButtonWithBorder';
 
@@ -10,7 +10,7 @@ const RegisterScreen: ScreenWithProps<'RegisterScreen'> = ({ navigation, route }
   };
 
   return (
-    <Container>
+    <StyledContainer>
       <LogoImage source={require('../../../../assets/logo.png')} />
       <Title>Программа{'\n'} поддержки пациентов и врачей</Title>
       <RegisterContainer>
@@ -19,7 +19,7 @@ const RegisterScreen: ScreenWithProps<'RegisterScreen'> = ({ navigation, route }
         </Title>
         <ButtonWithBorder title="Врач" onPress={onPress} />
       </RegisterContainer>
-    </Container>
+    </StyledContainer>
   );
 };
 

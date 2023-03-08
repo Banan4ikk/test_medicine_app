@@ -2,7 +2,7 @@ import { createStackNavigator, StackNavigationOptions } from '@react-navigation/
 import RegisterScreen from '../screens/NoAuthScreens/RegisterStartScreen';
 import { ScreenParams, ScreenWithProps } from './ScreenParams';
 import { Route } from '@react-navigation/native';
-import RegisterUserScreen from '../screens/NoAuthScreens/RegisterUserDataScreen';
+import RegisterUserScreen from '../screens/NoAuthScreens/RegisterUserScreen';
 
 type ScreenType = {
   component: ScreenWithProps<keyof ScreenParams>;
