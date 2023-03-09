@@ -15,4 +15,5 @@ export const StyledText = styled.Text`
   font-family: 'Manrope-SemiBold';
   font-size: 18px;
   color: ${mainColor};
+  transform: translateY(-2px);
 `;

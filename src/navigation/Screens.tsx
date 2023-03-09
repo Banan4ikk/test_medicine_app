@@ -1,8 +1,8 @@
 import { createStackNavigator, StackNavigationOptions } from '@react-navigation/stack';
 import RegisterScreen from '../screens/NoAuthScreens/RegisterStartScreen';
 import { ScreenParams, ScreenWithProps } from './ScreenParams';
-import { Route } from '@react-navigation/native';
 import RegisterUserScreen from '../screens/NoAuthScreens/RegisterUserScreen';
+import RegistrationCodeScreen from '../screens/NoAuthScreens/RegistrationCodeScreen';
 
 type ScreenType = {
   component: ScreenWithProps<keyof ScreenParams>;
@@ -17,6 +17,9 @@ export const screens: ScreenListElements = {
   },
   UserDataRegisterScreen: {
     component: RegisterUserScreen,
+  },
+  RegistrationCodeScreen: {
+    component: RegistrationCodeScreen,
   },
 };
 

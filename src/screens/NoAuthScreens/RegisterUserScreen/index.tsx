@@ -93,7 +93,7 @@ const RegisterUserScreen: ScreenWithProps<'RegisterUserScreen'> = ({ navigation,
   };
 
   const onSubmit = () => {
-    navigation.navigate('')
+    navigation.navigate('RegistrationCodeScreen')
   }
 
   const [personalDataChecked, setPersonalDataChecked] = useState(false);
@@ -102,7 +102,7 @@ const RegisterUserScreen: ScreenWithProps<'RegisterUserScreen'> = ({ navigation,
 
   return (
     <Container>
-      <NavigationHeader withCrossIcon title="Регистрация в кабинете врача" />
+      <NavigationHeader navigation={navigation} allowGoBack withCrossIcon title="Регистрация в кабинете врача" />
       <ContainerWithLogo scrollable>
         <FieldContainer>
           <FieldText>Фамилия</FieldText>

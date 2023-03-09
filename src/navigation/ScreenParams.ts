@@ -5,6 +5,7 @@ import { FC } from 'react';
 export interface ScreenParams extends ParamListBase {
   RegisterScreen: undefined;
   RegisterUserScreen: undefined;
+  RegistrationCodeScreen: undefined;
 }
 
 export type ScreenProps<Route extends keyof ScreenParams> = StackScreenProps<ScreenParams, Route>;
